@@ -1,0 +1,13 @@
+.container{
+    @apply  fixed right-0 bottom-0 left-0 top-0 hidden items-start justify-center;
+    background-color: rgba(10,10,10,.4);
+    .rules{
+        @apply mt-[10%] bg-primary-40 h-60 flex flex-col w-1/2 justify-center shadow-lg text-primary-10 text-lg rounded-lg px-10 text-left;
+        p{
+            @apply mb-10;
+        }
+    }
+}
+.show{
+    @apply flex
+}

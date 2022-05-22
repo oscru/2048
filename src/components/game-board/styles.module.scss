@@ -1,0 +1,6 @@
+.gameBoard{
+    @apply grid bg-primary-20 w-[600px] p-[1.25rem] m-auto rounded-xl;
+    div{
+        @apply bg-primary-30 w-[120px] h-[120px] m-auto rounded-md;
+    }
+}

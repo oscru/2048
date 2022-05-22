@@ -1,0 +1,8 @@
+.container {
+  @apply grid place-items-center absolute;
+  // top: calc(1.55 * (13.5vmin + 2vmin) + 2vmin);
+  // left: calc(4.6 * (13.5vmin + 2vmin) + 2vmin);
+  span {
+    @apply text-primary-10 font-bold text-[64px];
+  }
+}
