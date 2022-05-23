@@ -6,16 +6,17 @@ const Tile = ({
   position,
   index,
   color,
-  gridSizes,
+  // gridSizes,
   ...rest
 }: TileProps) => {
-  // console.log(position);
+  console.log("x",position[0].dataset.x);
+  console.log("y",position[1].dataset.y);
   return (
     <div
       className={styles.container}
       style={{
-        top: `calc(${position[1]} * (13.5vmin + 2vmin) + 2vmin)`,
-        left: `calc(${position[0]} * (13.5vmin + 2vmin) + 2vmin)`,
+        top: `calc(${position[0]?.dataset?.x} * (13.5vmin + 2vmin) + 2vmin)`,
+        left: `calc(${position[1]?.dataset?.y} * (13.5vmin + 2vmin) + 2vmin)`,
       }}
       {...rest}
     >

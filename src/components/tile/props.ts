@@ -1,11 +1,6 @@
 export default interface TileProps {
   value: string;
-  position: [string, string];
+  position: any;
   index?: number;
   color?: string;
-  gridSizes: {
-    gap: string;
-    size: number;
-    cell: string;
-  };
 }

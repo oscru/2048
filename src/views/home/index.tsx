@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 
 const Home = () => {
   const [showInstructions, setShowInstructions] = useState(false);
+  const [newGame, setNewGame] = useState(true);
 
   const getFirstGame = () => {
     if (localStorage.getItem("firstGame") === null) {
@@ -17,6 +18,10 @@ const Home = () => {
   useEffect(() => {
     getFirstGame();
   });
+
+  const gameOver = () => {
+    setNewGame(false);
+  };
 
   return (
     <div className={styles.mainContainer}>
@@ -37,7 +42,11 @@ const Home = () => {
         show={showInstructions}
         setShow={() => setShowInstructions(false)}
       />
-      <GameBoard />
+      <GameBoard
+        newGame={newGame}
+        setNewGame={() => setNewGame(true)}
+        gameOver={() => gameOver()}
+      />
     </div>
   );
 };

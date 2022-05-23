@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Tile from "../tile";
 import styles from "./styles.module.scss";
 import colors from "../../config/colors";
 import classNames from "classnames";
 import { posix } from "path";
+import { randomInt } from "crypto";
+import gameBoardProps from "./props";
 
 const gameGrid = new Array(16).fill("");
 
@@ -27,7 +29,7 @@ const getrandomNumber = () => {
   return randomIndex;
 };
 
-const setInitialTies = () => {
+const setInitial = () => {
   // const gridContainer = document.getElementById("gridContainer");
   const randomIndex = getrandomNumber();
   const randomGridItem =
@@ -37,6 +39,10 @@ const setInitialTies = () => {
   // const setRandomInitialTies = randomGridItem?.children[randomIndex];
   let x = randomGridItem?.getAttribute("data-x");
   let y = randomGridItem?.getAttribute("data-y");
+
+  console.log(41, x, y);
+
+  return <Tile position={[x, y]} value={"2"} />;
 
   /*  console.log(x, y)
   } */
@@ -70,9 +76,26 @@ if (elem) {
   }
 }
 
-const GameBoard = () => {
+const GameBoard = ({ newGame, setNewGame, gameOver }: gameBoardProps) => {
+  const [firstTilePosition, setFirstTilePosition] = useState(0);
+  const [secondTilePosition, setSecondTilePosition] = useState(0);
+
+  const setFirstTiles = () => {
+    setFirstTilePosition(Math.floor(Math.random() * gameGrid.length));
+    setSecondTilePosition(Math.floor(Math.random() * gameGrid.length));
+  };
+
+  const cellFirstRef = useRef(null);
+  const cellSecondRef = useRef(null);
+
+  /*  useEffect(() => {
+  
+  }, []); */
+
   useEffect(() => {
-    setInitialTies();
+    // setInitialTies();
+    // setFirstTilePosition(Math.floor(Math.random() * gameGrid.length));
+    // setSecondTilePosition(Math.floor(Math.random() * gameGrid.length));
     const listener = (event: any) => {
       switch (event.keyCode) {
         case arrows.ArrowUp:
@@ -106,7 +129,7 @@ const GameBoard = () => {
       document.removeEventListener("keydown", listener);
     };
   }, []);
-
+  useEffect(() => setFirstTiles(),[]);
   return (
     <div
       className={classNames(styles.gameBoard)}
@@ -119,22 +142,40 @@ const GameBoard = () => {
     >
       {gameGrid.map((cell, index) => {
         // let color = colors.find((color) => color.value === cell);
+        console.log(index);
         return (
           <div
             className="cellItem"
             key={index}
             data-x={index % gridSizes.size}
             data-y={Math.floor(index / gridSizes.size)}
+            ref={
+              index === firstTilePosition
+                ? cellFirstRef
+                : null || index === secondTilePosition
+                ? cellSecondRef
+                : null
+            }
           ></div>
         );
       })}
 
-      <Tile
-        value={"2"}
-        color={"#fff"}
-        gridSizes={gridSizes}
-        position={["9", "4"]}
-      />
+      {firstTilePosition && cellFirstRef && cellFirstRef.current ? (
+        <Tile
+          value={"2"}
+          color={"#fff"}
+          // gridSizes={gridSizes}
+          position={[cellFirstRef?.current, cellFirstRef?.current]}
+        />
+      ) : null}
+      {secondTilePosition && cellSecondRef && cellSecondRef.current ? (
+        <Tile
+          value={"2"}
+          color={"#fff"}
+          // gridSizes={gridSizes}
+          position={[cellSecondRef?.current, cellSecondRef?.current]}
+        />
+      ) : null}
     </div>
   );
 };
