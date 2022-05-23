@@ -30,22 +30,16 @@ const getrandomNumber = () => {
 };
 
 const setInitial = () => {
-  // const gridContainer = document.getElementById("gridContainer");
   const randomIndex = getrandomNumber();
   const randomGridItem =
     document.getElementsByClassName("cellItem")[randomIndex];
-  // console.log(gridContainer?.getAttribute("data-x"))
 
-  // const setRandomInitialTies = randomGridItem?.children[randomIndex];
+  
   let x = randomGridItem?.getAttribute("data-x");
   let y = randomGridItem?.getAttribute("data-y");
 
-  console.log(41, x, y);
-
   return <Tile position={[x, y]} value={"2"} />;
 
-  /*  console.log(x, y)
-  } */
 };
 
 /* const setNewTie = () => {
@@ -88,14 +82,7 @@ const GameBoard = ({ newGame, setNewGame, gameOver }: gameBoardProps) => {
   const cellFirstRef = useRef(null);
   const cellSecondRef = useRef(null);
 
-  /*  useEffect(() => {
-  
-  }, []); */
-
   useEffect(() => {
-    // setInitialTies();
-    // setFirstTilePosition(Math.floor(Math.random() * gameGrid.length));
-    // setSecondTilePosition(Math.floor(Math.random() * gameGrid.length));
     const listener = (event: any) => {
       switch (event.keyCode) {
         case arrows.ArrowUp:

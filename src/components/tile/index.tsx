@@ -9,8 +9,6 @@ const Tile = ({
   // gridSizes,
   ...rest
 }: TileProps) => {
-  console.log("x",position[0].dataset.x);
-  console.log("y",position[1].dataset.y);
   return (
     <div
       className={styles.container}
